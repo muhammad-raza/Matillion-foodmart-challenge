@@ -19,7 +19,7 @@ public class Application {
     @Autowired FoodmartService service;
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(Application.class, args).registerShutdownHook();
         ApplicationContext context
                 = new AnnotationConfigApplicationContext(Application.class);
 
