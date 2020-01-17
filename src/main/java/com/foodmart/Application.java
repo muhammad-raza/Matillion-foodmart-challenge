@@ -2,12 +2,14 @@ package com.foodmart;
 
 import com.foodmart.entity.Employee;
 import com.foodmart.service.FoodmartService;
+import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,7 +18,8 @@ import static com.foodmart.commandLine.CommandLineHelper.*;
 @SpringBootApplication
 public class Application {
 
-    @Autowired FoodmartService service;
+    @Autowired
+    FoodmartService service;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args).registerShutdownHook();
@@ -44,9 +47,8 @@ public class Application {
 
             printTable(employees);
 
-        } catch (Exception e){
+        } catch (IndexOutOfBoundsException | InputMismatchException e) {
             System.out.println("Please enter a valid number in the range provided");
         }
-
     }
 }

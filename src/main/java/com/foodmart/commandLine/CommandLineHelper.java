@@ -66,14 +66,18 @@ public class CommandLineHelper {
     public static void printTable(List<Employee> employees) {
         CommandLineTable commandLineTable = new CommandLineTable();
         commandLineTable.setHeaders(HEADERS);
-        employees.forEach(e -> commandLineTable.addRow(
-                e.getId(),
-                e.getFullName(),
-                e.getPositionTitle(),
-                new SalaryConverter().convert(e.getSalary()),
-                e.getGender(),
-                new DateConverter().convert(e.getBirthDate()),
-                new DateConverter().convert(e.getHireDate())));
+        SalaryConverter salaryConverter = new SalaryConverter();
+        DateConverter dateConverter = new DateConverter();
+        employees.forEach(e -> {
+            commandLineTable.addRow(
+                    e.getId(),
+                    e.getFullName(),
+                    e.getPositionTitle(),
+                    salaryConverter.convert(e.getSalary()),
+                    e.getGender(),
+                    dateConverter.convert(e.getBirthDate()),
+                    dateConverter.convert(e.getHireDate()));
+        });
 
         commandLineTable.print();
     }
